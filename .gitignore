@@ -99,3 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# etc
+db.sqlite3
+geckodriver.log
+*.pyc
