@@ -37,6 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Django Rest Framework
+    'rest_framework',
+    # Django Rest Swagger
+    'rest_framework_swagger',
+
+    # lists application
+    #'lists.apps.ListsConfig',
+     'lists',
 ]
 
 MIDDLEWARE = [

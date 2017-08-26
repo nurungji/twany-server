@@ -13,11 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
-from lists import views
+from django.conf.urls import url, include
+from rest_framework.urlpatterns import format_suffix_patterns
+from lists.views import CreateView
 
 urlpatterns = [
-    #url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home_page, name='home'),
+    url(r'^lists/$', CreateView.as_view(), name="create"),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
