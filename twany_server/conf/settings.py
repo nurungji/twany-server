@@ -40,12 +40,9 @@ INSTALLED_APPS = [
 
     # Django Rest Framework
     'rest_framework',
-    # Django Rest Swagger
-    'rest_framework_swagger',
 
     # lists application
     'lists.apps.ListsConfig',
-    # 'lists',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'superlists.urls'
+ROOT_URLCONF = 'conf.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'superlists.wsgi.application'
+WSGI_APPLICATION = 'conf.wsgi.application'
 
 
 # Database
