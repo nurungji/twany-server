@@ -25,7 +25,7 @@ SECRET_KEY = 's*73-8hp#&tscny1s9t_ta$n1a=^6*)3@sccd3fktgmu#leci_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
 
     # lists application
-    #'lists.apps.ListsConfig',
-     'lists',
+    'lists.apps.ListsConfig',
+    # 'lists',
 ]
 
 MIDDLEWARE = [
