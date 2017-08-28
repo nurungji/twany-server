@@ -1,6 +1,8 @@
-from django.test import TestCase
-from .models import Member
 import datetime
+
+from django.test import TestCase
+
+from twany.api.models import Member
 
 
 class ModelTest(TestCase):

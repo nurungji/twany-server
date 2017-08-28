@@ -1,10 +1,11 @@
 from datetime import datetime
+
+from api.models import Member
+from api.serializers import MemberSerializer
 from django.utils import timezone
 from django.utils.six import BytesIO
-from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from lists.models import Member
-from lists.serializers import MemberSerializer
+from rest_framework.renderers import JSONRenderer
 
 members_datetime = timezone.make_aware(datetime.now(), timezone.get_current_timezone())
 member1 = Member(name='Nick Park', date_modified=members_datetime)
