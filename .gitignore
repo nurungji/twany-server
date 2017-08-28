@@ -105,3 +105,6 @@ db.sqlite3
 geckodriver.log
 *.pyc
 *.swp
+
+# pycharm
+.idea/

@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
@@ -11,9 +10,13 @@ class ViewTestCase(TestCase):
     def setUp(self):
         """Define the test client and other test variables."""
         self.client = APIClient()
-        self.member_data = {'name': 'Nick'}
+        self.member_data = \
+            {
+                'name': 'Nick',
+                'date_modified': '2017-08-28T15:14:59.036366Z'
+            }
         self.response = self.client.post(
-            reverse('create'),
+            '/api/member/',
             self.member_data,
             format="json")
 

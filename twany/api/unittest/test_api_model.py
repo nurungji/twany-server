@@ -2,7 +2,7 @@ import datetime
 
 from django.test import TestCase
 
-from twany.api.models import Member
+from ..models import Member
 
 
 class ModelTest(TestCase):
