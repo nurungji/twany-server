@@ -2,7 +2,7 @@ import datetime
 
 from django.test import TestCase
 
-from ..models import Member
+from ..models.member_model import Member
 
 
 class ModelTest(TestCase):
