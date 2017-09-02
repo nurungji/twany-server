@@ -1,7 +1,5 @@
 from django.db import models
 
-from .password_model import Password
-
 
 class Member(models.Model):
     name = models.CharField(
@@ -9,9 +7,8 @@ class Member(models.Model):
         blank=False,
         unique=True
     )
-    password = models.OneToOneField(
-        Password,
-        on_delete=models.CASCADE,
+    password = models.CharField(
+        max_length=255,
         default=''
     )
     nick_name = models.CharField(
