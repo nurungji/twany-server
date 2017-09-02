@@ -1,7 +1,6 @@
 from django.db import models
 
-from .diary_image_model import DiaryImages
-from .member_model import Member
+from ..models.member_model import Member
 
 
 class Diary(models.Model):
@@ -10,15 +9,18 @@ class Diary(models.Model):
         blank=True,
         unique=False
     )
-    author = models.OneToOneField(
+    author = models.ForeignKey(
         Member,
+        null=True,
+        blank=True,
         on_delete=models.CASCADE
     )
-    date_created = models.DateTimeField(
-        auto_now_add=True
-    )
-    date_modified = models.DateTimeField()
     latitude = models.FloatField()
     longitude = models.FloatField()
     content = models.TextField()
-    image = models.ForeignKey(DiaryImages)
+    date_created = models.DateTimeField(
+        auto_now_add=True
+    )
+    date_modified = models.DateTimeField(
+        auto_now=True
+    )
