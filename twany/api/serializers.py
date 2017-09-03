@@ -1,24 +1,10 @@
 from rest_framework import serializers
 
 from .models import Member
-from .models import Password
-
-
-class PasswordSerializer(serializers.Serializer):
-    password_hash = serializers.CharField(max_length=255)
-
-    def create(self, validated_data):
-        pass
-
-    def update(self, instance, validated_data):
-        pass
-
-    class Meta:
-        model = Password
 
 
 class MemberSerializer(serializers.Serializer):
-    pk = serializers.IntegerField(read_only=True)
+    id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=255)
     nick_name = serializers.CharField(max_length=200)
     password = serializers.CharField(
@@ -29,9 +15,6 @@ class MemberSerializer(serializers.Serializer):
         max_length=255,
         required=True
     )
-
-    # date_created = serializers.DateTimeField()
-    # date_modified = serializers.DateTimeField()
 
     def create(self, validated_data):
         return Member.objects.create(**validated_data)
