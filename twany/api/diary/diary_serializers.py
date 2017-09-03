@@ -3,7 +3,7 @@ from rest_framework import serializers
 from ..diary import Diary
 
 
-class DiarySerializer(serializers.Serializer):
+class DiarySerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(
         read_only=True
     )
@@ -29,3 +29,4 @@ class DiarySerializer(serializers.Serializer):
 
     class Meta:
         model = Diary
+        fields = '__all__'

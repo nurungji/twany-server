@@ -4,12 +4,15 @@ from .diary_model import Diary
 
 
 class DiaryImages(models.Model):
+    id = models.IntegerField(
+        primary_key=True
+    )
     diary = models.ForeignKey(
         Diary,
+        to_field='id',
         on_delete=models.CASCADE
     )
-    image = models.ImageField(
-        upload_to='res/diary/',
-        null=True,
-        blank=True
+    date_created = models.DateTimeField(
+        auto_now_add=True
     )
+    image = models.FileField()
