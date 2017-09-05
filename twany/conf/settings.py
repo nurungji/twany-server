@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
     # api application
     'api.apps.ApiConfig',
-    'django-nose',
+    'django_nose',
 ]
 
 # Run all the tests we have with nose
