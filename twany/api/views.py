@@ -8,6 +8,26 @@ from .models import Member
 from .serializers import MemberSerializer
 
 
+#
+# class YourSerializer(serializers.Serializer):
+#     anniversary = serializers.IntegerField()
+#
+#     def create(self, validated_data):
+#         pass
+#
+#     def update(self, instance, validated_data):
+#         pass
+#
+#
+# class YourView(APIView):
+#     @csrf_exempt
+#     def get(self, request):
+#         if request.method == 'GET':
+#             yourdata = [{"anniversary": 10}]
+#             results = YourSerializer(yourdata, many=True).data
+#             return Response(results)
+
+
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
@@ -19,7 +39,9 @@ class JSONResponse(HttpResponse):
 def member_list(request):
     if request.method == 'GET':
         members = Member.objects.all()
+        print("members : " + str(members))
         members_serializer = MemberSerializer(members, many=True)
+        print("members_serializer : " + str(members_serializer.data))
         return JSONResponse(members_serializer.data)
 
     elif request.method == 'POST':

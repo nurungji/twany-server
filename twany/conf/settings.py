@@ -43,6 +43,18 @@ INSTALLED_APPS = [
 
     # api application
     'api.apps.ApiConfig',
+    'django-nose',
+]
+
+# Run all the tests we have with nose
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Measure test coverage by nose
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-erase',
+    '--cover-inclusive',
+    '--cover-package=api',
 ]
 
 MIDDLEWARE = [
