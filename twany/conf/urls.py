@@ -19,5 +19,5 @@ urlpatterns = [
     url(r'^', include('api.urls')),
     url(r'^', include('api.diary.diary_urls')),
     url(r'^', include('api.user.user_urls')),
-
+    url(r'^', include('api.couple.couple_urls')),
 ]

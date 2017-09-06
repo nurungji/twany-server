@@ -13,7 +13,8 @@ class User(models.Model):
     )
     nick_name = models.CharField(
         max_length=200,
-        default=name
+        default=name,
+        unique=True
     )
     password = models.CharField(
         max_length=255,
@@ -22,7 +23,7 @@ class User(models.Model):
     email = models.CharField(
         max_length=200,
         blank=False,
-        default=''
+        unique=True
     )
     identifier = models.CharField(
         max_length=300,
@@ -30,7 +31,8 @@ class User(models.Model):
     )
     couple = models.ForeignKey(
         Couple,
-        null=True
+        null=True,
+        default=None
     )
     is_coupled = models.BooleanField()
     date_created = models.DateTimeField(

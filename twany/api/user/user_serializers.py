@@ -16,7 +16,11 @@ class UserSerializer(serializers.Serializer):
         max_length=255,
         required=True
     )
-    couple = serializers.PrimaryKeyRelatedField(queryset=Couple.objects.all())
+    couple = serializers.PrimaryKeyRelatedField(
+        queryset=Couple.objects.all(),
+        required=False,
+        allow_null=True
+    )
     is_coupled = serializers.BooleanField()
     identifier = serializers.CharField(
         max_length=300

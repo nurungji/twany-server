@@ -6,7 +6,10 @@ from .couple_model import Couple
 class CoupleSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     couple_date = serializers.DateField()
-    couple_image = serializers.ImageField()
+    couple_image = serializers.ImageField(
+        required=False,
+        allow_null=True
+    )
 
     def create(self, validated_data):
         return Couple.objects.create(**validated_data)
