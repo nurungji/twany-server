@@ -1,55 +1,69 @@
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+from requests import Response
+from rest_framework import generics
+from rest_framework import mixins
+from rest_framework import response
+from rest_framework import reverse
 from rest_framework import status
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
 from .couple_model import Couple
 from .couple_serializers import CoupleSerializer
 
 
-class JSONResponse(HttpResponse):
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
+class CoupleList(generics.ListCreateAPIView,
+                 mixins.ListModelMixin,
+                 mixins.CreateModelMixin):
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    parser_classes = (JSONParser, MultiPartParser, FormParser,)
+    queryset = Couple.objects.all()
+    serializer_class = CoupleSerializer
+    name = 'couple-list'
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+        # def list(self, request):
+        #     # Note the use of `get_queryset()` instead of `self.queryset`
+        #     queryset = self.get_queryset()
+        #     serializer = CoupleSerializer(queryset, many=True)
+        #     return response(serializer.data)
 
 
-@csrf_exempt
-def couple_list(request):
-    if request.method == 'GET':
-        couples = Couple.objects.all()
-        couples_serializer = CoupleSerializer(couples, many=True)
-        return JSONResponse(couples_serializer.data)
-
-    elif request.method == 'POST':
-        couple_data = JSONParser().parse(request)
-        couple_serializer = CoupleSerializer(data=couple_data)
-        if couple_serializer.is_valid():
-            couple_serializer.save()
-            return JSONResponse(couple_serializer.data, status=status.HTTP_201_CREATED)
-        return JSONResponse(couple_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class CoupleDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Couple.objects.all()
+    serializer_class = CoupleSerializer
+    name = 'couple-detail'
 
 
-@csrf_exempt
-def couple_detail(request, pk):
-    try:
-        couple = Couple.objects.get(pk=pk)
-    except Couple.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+class ApiRoot(generics.GenericAPIView):
+    name = 'api-root'
 
-    if request.method == 'GET':
-        couple_serializer = CoupleSerializer(couple)
-        return JSONResponse(couple_serializer.data)
+    def get(self, request, *args, **kwargs):
+        return response({
+            'api/v1/couple': reverse(Couple.name, request=request)
+        })
 
-    elif request.method == 'PUT':
-        couple_data = JSONParser().parse(request)
-        couple_serializer = CoupleSerializer(couple, data=couple_data)
-        if couple_serializer.is_valid():
-            couple_serializer.save()
-            return JSONResponse(couple_serializer.data)
-        return JSONResponse(couple_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
-        couple.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+def post(self, request, format=None):
+    file = request.FILES['couple_image']
+    filename = '/tmp/myfile'
+    with open(filename, 'wb+') as temp_file:
+        for chunk in file.chunks():
+            temp_file.write(chunk)
+
+    saved_filed = open(filename)  # there you go
+
+
+class CoupleReprImages(generics.RetrieveUpdateDestroyAPIView):
+    name = 'couple-repr-image'
+
+    def post(self, request, format=None):
+        serializer = CoupleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

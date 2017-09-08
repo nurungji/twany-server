@@ -8,8 +8,10 @@ class Couple(models.Model):
     couple_date = models.DateField(
         editable=True
     )
-    couple_image = models.FileField(
-        default='api/default_image.png'
+    couple_image = models.ImageField(
+        upload_to="twany/res/images/couple",
+        null=True,
+        default=None
     )
 
     # diary_book = models.ForeignKey(
