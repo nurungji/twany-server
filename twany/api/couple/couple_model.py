@@ -9,7 +9,7 @@ class Couple(models.Model):
         editable=True
     )
     couple_image = models.ImageField(
-        upload_to="twany/res/images/couple",
+        upload_to="twany/api/res/images/couple",
         null=True,
         default=None
     )
