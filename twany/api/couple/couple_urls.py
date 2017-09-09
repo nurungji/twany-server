@@ -12,5 +12,4 @@ urlpatterns = [
     url(r'^$',
         couple_views.ApiRoot.as_view(),
         name=couple_views.ApiRoot.name),
-
 ]

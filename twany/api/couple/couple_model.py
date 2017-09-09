@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Couple(models.Model):
+    saving_path = '%Y/%m/%d/couple_image'
+
     id = models.IntegerField(
         primary_key=True
     )
@@ -9,7 +11,7 @@ class Couple(models.Model):
         editable=True
     )
     couple_image = models.ImageField(
-        upload_to="twany/api/res/images/couple",
+        upload_to=saving_path,
         null=True,
         default=None
     )
