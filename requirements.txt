@@ -8,7 +8,7 @@ Django==1.11.2
 django-nose==1.4.5
 django-rest-swagger==2.1.2
 djangorestframework==3.6.4
-httpie==0.9.9
+httpie==1.0.3
 idna==2.6
 itypes==1.1.0
 Jinja2==2.9.6
